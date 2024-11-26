@@ -82,12 +82,7 @@ def calculate_backward(fct, mj, mach_id, num_lots, lots_time, job_machs):
                                 now_job_pt[j] = smax_num
                             else:
                                 now_job_pt[j] = now_job_pt[j + 1] - lots_time[now_machine_job[t] - 1][k]
-                        else:
-                            if j == num_lots[now_machine_job[t] - 1] - 1:
 
-                                now_job_pt[j] = backward_C[num_stage_jobid[k][k2] - 1][t + 1][0] - lots_time[now_machine_job[t+1]-1][k]
-                            else:
-                                now_job_pt[j] = now_job_pt[j + 1] - lots_time[now_machine_job[t] - 1][k]
 
                 # print("$$$$$$$", backward_C[num_stage_jobid[k][k2] - 1])
             # print(backward_C)
@@ -118,15 +113,7 @@ def calculate_backward(fct, mj, mach_id, num_lots, lots_time, job_machs):
                                 now_job_pts = backward_C[now_machine - 1][t+1][0]-lots_time[now_machine_job[t+1]-1][k]
                                 now_job_pt[j] = min(last_stage_job_pts, now_job_pts)
 
-                            else:
 
-                                last_stage_job_pt = backward_C[last_stage_id - 1][last_stage_id_index][j]
-
-                                last_stage_job_pts = last_stage_job_pt - lots_time[now_machine_job[t] - 1][k + 1]
-
-                                now_job_pts = now_job_pt[j + 1] - lots_time[now_machine_job[t] - 1][k]
-
-                                now_job_pt[j] = min(last_stage_job_pts, now_job_pts)
 
     # print("后向完成时间：", backward_C)
     return backward_C
